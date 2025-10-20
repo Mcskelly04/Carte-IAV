@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>🌍 Campus IAV Hassan II – Carte interactive</title>
+
+	<!-- Feuilles de style et scripts Leaflet -->
+	<link rel="stylesheet" href="leaflet.css">
+	<script src="leaflet.js"></script>
+
+	<style>
+		body {
+			margin: 0;
+			font-family: "Poppins", Arial, sans-serif;
+			background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		header {
+			text-align: center;
+			background-color: #004d40;
+			color: white;
+			padding: 25px 10px;
+			width: 100%;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+		}
+
+		header h1 {
+			margin: 0;
+			font-size: 1.9em;
+			letter-spacing: 1px;
+		}
+
+		header p {
+			font-size: 1em;
+			margin-top: 6px;
+			color: #c8e6c9;
+		}
+
+		#map {
+			margin-top: 25px;
+			width: 90%;
+			height: 600px;
+			border-radius: 15px;
+			box-shadow: 0 0 20px rgba(0, 77, 64, 0.3);
+		}
+
+		footer {
+			margin-top: 25px;
+			padding: 10px;
+			font-size: 0.9em;
+			color: #004d40;
+			text-align: center;
+		}
+
+		.leaflet-popup-content b {
+			color: #0a9396;
+		}
+	</style>
+</head>
+<body>
+
+	<header>
+		<h1>Institut Agronomique et Vétérinaire Hassan II – Campus de Rabat</h1>
+		<p>Explorez le campus et découvrez les différentes filières à travers la carte interactive 🌿</p>
+	</header>
+
+	<div id="map"></div>
+
+	<footer>
+		© 2025 IAV Hassan II – Projet pédagogique | Réalisé par les étudiants du département Topographie
+	</footer>
+
+	<script>
+		const map = L.map('map').setView([33.9765374, -6.8668853], 17);
+
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; OpenStreetMap contributors'
+		}).addTo(map);
+
+		// Icône personnalisée
+		const esgtIcon = L.icon({
+			iconUrl: 'esgt.png',
+			iconSize: [60, 60],
+			iconAnchor: [30, 60],
+			popupAnchor: [0, -60]
+		});
+
+		L.marker([33.9765374, -6.8668853], { icon: esgtIcon })
+			.addTo(map)
+			.bindPopup('<b>IAV Hassan II</b><br>Bienvenue sur le campus de Rabat 🌿');
+
+		// Polygone du département de Topographie
+		const topoPolygon = L.polygon([
+			[33.97620244,-6.86710121],
+			[33.97634924,-6.86730964],
+			[33.97651615,-6.86714828],
+			[33.97650094,-6.86711065],
+			[33.97659856,-6.86702574],
+			[33.97669458,-6.86715696],
+			[33.97676899,-6.86708845],
+			[33.97674259,-6.86703635],
+			[33.97681500,-6.86695868],
+			[33.97675879,-6.86687015],
+			[33.97683261,-6.86679561],
+			[33.97670598,-6.86659660],
+			[33.97662617,-6.86666873],
+			[33.97657596,-6.86659708],
+			[33.97650034,-6.86667210],
+			[33.97655795,-6.86676473],
+			[33.97653395,-6.86678500],
+			[33.97644113,-6.86664870],
+			[33.97632751,-6.86676087],
+			[33.97641873,-6.86690657],
+			[33.97637952,-6.86693371]
+		], {
+			color: '#004d40',
+			fillColor: '#26a69a',
+			fillOpacity: 0.6
+		})
+		.addTo(map)
+		.bindPopup('<b>Département de Topographie</b><br>Cliquez pour découvrir la filière 👇')
+		.on('click', function() {
+			window.open('topographie.html', '_blank');
+		})
+		.on('mouseover', function() {
+			this.setStyle({ fillOpacity: 0.85 });
+		})
+		.on('mouseout', function() {
+			this.setStyle({ fillOpacity: 0.6 });
+		});
+	</script>
+
+</body>
+</html>
