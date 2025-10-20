@@ -34,7 +34,6 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // Création d'une icône personnalisée avec le logo de l'IAV
         const esgtIcon = L.icon({
             iconUrl: 'esgt.png', // ton image dans le même dossier
             iconSize: [60, 60],      // taille du logo (tu peux ajuster)
@@ -42,7 +41,6 @@
             popupAnchor: [0, -60]    // position de la popup par rapport à l’icône
         });
 
-        // Ajout du marker avec l'icône personnalisée
         const marker = L.marker([33.9765374, -6.8668853], { icon: esgtIcon })
             .addTo(map)
             .bindPopup('<b>Département de Topographie</b><br>Campus IAV Hassan II - Rabat')
@@ -116,4 +114,5 @@
     </script>
 </body>
 </html>
+
 
